@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tasks;
 
 class TaskController extends Controller
 {
@@ -12,8 +13,14 @@ class TaskController extends Controller
         return view('tasks.list', ['tasks' => $tasks]);
     }
 
+    // Show add task form
+    public function create()
+    {
+        return view('tasks.add_task');
+    }
+
     // Add new task
-    public function create(Request $request) {
+    public function store(Request $request) {
         $newTask = Tasks::create([
             'task_name' => $request->task_name,
             'due_for' => $request->due_for,
